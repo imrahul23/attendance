@@ -1,0 +1,10 @@
+com/attendance/core/Report.class
+com/attendance/dao/AdminMapper.class
+com/attendance/dao/UserMapper.class
+com/attendance/dao/SampleDao.class
+com/attendance/core/Credential.class
+com/attendance/core/User.class
+com/attendance/AttendanceConfiguration.class
+com/attendance/AttendanceApplication.class
+com/attendance/health/DatabaseHealthCheck.class
+com/attendance/resources/AdminResource.class
