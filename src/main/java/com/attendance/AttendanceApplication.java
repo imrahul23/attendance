@@ -4,6 +4,7 @@ import org.skife.jdbi.v2.DBI;
 
 import com.attendance.dao.SampleDao;
 import com.attendance.resources.AdminResource;
+import com.attendance.resources.EmployeeResource;
 
 import io.dropwizard.Application;
 import io.dropwizard.jdbi.DBIFactory;
@@ -34,6 +35,8 @@ public class AttendanceApplication extends Application<AttendanceConfiguration> 
 		final SampleDao dao = jdbi.onDemand(SampleDao.class);
 
 		environment.jersey().register(new AdminResource(dao));
+//		environment.jersey().register(new EmployeeResource(dao));
+
     }
 
 }

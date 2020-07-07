@@ -1,7 +1,6 @@
 package com.attendance.resources;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -16,7 +15,6 @@ import javax.ws.rs.core.Response;
 
 import com.attendance.core.Credential;
 import com.attendance.core.Report;
-import com.attendance.core.User;
 import com.attendance.dao.SampleDao;
 
 @Path("/admin")
@@ -28,6 +26,7 @@ public class AdminResource {
 		this.sampleDao = sampleDao;
 	}
 
+	// get list of all employees
 	@Path("/getEmployees")
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -57,14 +56,24 @@ public class AdminResource {
 		return Response.status(200).entity("Employee with ID " + employeeID + "successfully deleted").build();
 	}
 
-//	// get daily report of all employees
-//	@GET
-//	@Path("/dailyReport")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public ArrayList<Report> viewDailyReport() {
-//		ArrayList<Report> dailyReport = sampleDao.viewDailyReport(LocalDate.now());
-//		System.out.println(dailyReport);
-//		return sampleDao.viewDailyReport(LocalDate.now());
-//	}
+	// get all report of an employee 
+	@GET
+	@Path("/dailyReport/{employeeID}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Report> viewDailyReport(@PathParam("employeeID") int employeeID) {
+		List<Report> dailyReport = sampleDao.getReportbyID(employeeID);
+		System.out.println(dailyReport);
+		return dailyReport;
+	}
+	
+	// get daily report of a date
+	@GET
+	@Path("/dailyReport/{on_date}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Report> viewDailyReport(@PathParam("on_date") LocalDate on_date) {
+		List<Report> dailyReport = sampleDao.getReportbyDate(java.sql.Date.valueOf(on_date));
+		System.out.println(dailyReport);
+		return dailyReport;
+	}
 
 }
