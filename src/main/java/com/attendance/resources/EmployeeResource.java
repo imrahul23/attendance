@@ -1,7 +1,7 @@
 package com.attendance.resources;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -21,44 +21,23 @@ public class EmployeeResource {
 
 	// mark absent
 	@Path("/absent")
-	@POST
+	@PUT
 	@Consumes("application/json")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Response markAbsent(Report report) {
-		sampleDao.markAbsent(report.getEmployeeID(), java.sql.Date.valueOf(report.getOnDate().toString()));
+		sampleDao.markAbsent(report.getEmployeeID(), java.sql.Date.valueOf(report.getOnDate()));
 		return Response.status(201).entity(sampleDao).build();
 	}
 
-//	// add new employee
-//	@POST
-//	@Path("/addEmployee")
+
+	////	// add inTime
+//	@Path("/{employeeID}/inTime")
+//	@PUT
 //	@Consumes("application/json")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Response addEmployee(Credential credential) {
-//
-//		Credential result = credential;
-//
-//		sampleDao.addEmployee(credential.getEmployeeID(), credential.getPassword());
-//		return Response.status(201).entity(result).build();
-//	}
-//
-//	// delete employee
-//	@DELETE
-//	@Path("/removeEmployee/{employeeID}")
-//	public Response removeEmployee(@PathParam("employeeID") int employeeID) {
-//		sampleDao.removeEmployee(employeeID);
-//
-//		return Response.status(200).entity("Employee with ID " + employeeID + "successfully deleted").build();
-//	}
-//
-//	// get daily report of all employees
-//	@GET
-//	@Path("/dailyReport/{employeeID}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public List<Report> viewDailyReport(@PathParam("employeeID") int employeeID) {
-//		List<Report> dailyReport = sampleDao.getDailyReport(employeeID);
-//		System.out.println(dailyReport);
-//		return dailyReport;
+//	@Produces({ MediaType.APPLICATION_JSON })
+//	public Response addInTime(@PathParam("employeeID") int employeeID, @PathParam("on_date") LocalDateParam on_date) {
+//		sampleDao.addInTime(employeeID, on_date);(employeeID, java.sql.Date.valueOf(on_date.toString()));
+//		return Response.status(201).entity(sampleDao).build();
 //	}
 
 }

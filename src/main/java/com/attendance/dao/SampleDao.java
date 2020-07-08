@@ -1,6 +1,5 @@
 package com.attendance.dao;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
@@ -54,6 +53,9 @@ public interface SampleDao {
 	@SqlUpdate("insert into daily_report(isPresent) values(false) where employeeID = :employeeID and on_date = : on_date")
 	void markAbsent(@Bind("employeeID") int employeeID, @Bind("on_date") java.sql.Date on_date);
 	
+	//Employee
+	@SqlUpdate("insert into daily_report(inTime) values(:inTime) where employeeID = :employeeID and on_date = : on_date")
+	void addInTime(@Bind("inTime") java.sql.Time inTime, @Bind("employeeID") int employeeID, @Bind("on_date") java.sql.Date on_date);
 	
 	
 
