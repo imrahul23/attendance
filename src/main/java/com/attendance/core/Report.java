@@ -33,6 +33,5 @@ public @Data class Report {
 	
 	@JsonProperty
 	private LocalTime timeInOffice;
-
 	
 }

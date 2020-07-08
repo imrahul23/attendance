@@ -1,15 +1,13 @@
 package com.attendance.resources;
 
-import java.time.LocalDate;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.attendance.core.Report;
 import com.attendance.dao.SampleDao;
 
 @Path("/employee")
@@ -22,12 +20,12 @@ public class EmployeeResource {
 	}
 
 	// mark absent
-	@Path("/absent/{employeeID}/{on_date}")
+	@Path("/absent")
 	@POST
 	@Consumes("application/json")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response markAbsent(@PathParam("employeeID") int employeeID, @PathParam("on_date") LocalDate on_date) {
-		sampleDao.markAbsent(employeeID, on_date);
+	public Response markAbsent(Report report) {
+		sampleDao.markAbsent(report.getEmployeeID(), java.sql.Date.valueOf(report.getOnDate().toString()));
 		return Response.status(201).entity(sampleDao).build();
 	}
 

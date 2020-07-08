@@ -52,7 +52,7 @@ public interface SampleDao {
 	
 	//Employee
 	@SqlUpdate("insert into daily_report(isPresent) values(false) where employeeID = :employeeID and on_date = : on_date")
-	void markAbsent(@Bind("employeeID") int employeeID, @Bind("on_date") LocalDate on_date);
+	void markAbsent(@Bind("employeeID") int employeeID, @Bind("on_date") java.sql.Date on_date);
 	
 	
 	
