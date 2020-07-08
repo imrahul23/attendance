@@ -1,6 +1,7 @@
 com/attendance/dao/SampleDao.class
 com/attendance/core/Credential.class
 com/attendance/AttendanceConfiguration.class
+com/attendance/client/AdminClient.class
 com/attendance/resources/AdminResource.class
 com/attendance/dao/ReportMapper.class
 com/attendance/core/Report.class

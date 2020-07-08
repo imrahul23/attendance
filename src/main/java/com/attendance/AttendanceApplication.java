@@ -1,10 +1,11 @@
 package com.attendance;
 
+import java.time.LocalDate;
+
 import org.skife.jdbi.v2.DBI;
 
 import com.attendance.dao.SampleDao;
 import com.attendance.resources.AdminResource;
-import com.attendance.resources.EmployeeResource;
 
 import io.dropwizard.Application;
 import io.dropwizard.jdbi.DBIFactory;

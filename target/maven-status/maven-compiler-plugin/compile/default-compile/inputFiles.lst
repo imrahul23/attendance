@@ -10,4 +10,5 @@
 /home/rahul/Desktop/dropwizard/dropwizard-attendance/src/main/java/com/attendance/dao/UserMapper.java
 /home/rahul/Desktop/dropwizard/dropwizard-attendance/src/main/java/com/attendance/AttendanceConfiguration.java
 /home/rahul/Desktop/dropwizard/dropwizard-attendance/src/main/java/com/attendance/core/Credential.java
+/home/rahul/Desktop/dropwizard/dropwizard-attendance/src/main/java/com/attendance/client/AdminClient.java
 /home/rahul/Desktop/dropwizard/dropwizard-attendance/src/main/java/com/attendance/dao/CredentialMapper.java

@@ -1,6 +1,6 @@
 package com.attendance.resources;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -17,6 +17,8 @@ import com.attendance.core.Credential;
 import com.attendance.core.Report;
 import com.attendance.dao.SampleDao;
 
+import io.dropwizard.jersey.params.LocalDateParam;
+
 @Path("/admin")
 public class AdminResource {
 
@@ -27,8 +29,8 @@ public class AdminResource {
 	}
 
 	// get list of all employees
-	@Path("/getEmployees")
 	@GET
+	@Path("/getEmployees")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<Credential> getUsers() {
 		return sampleDao.getUserList();
@@ -50,6 +52,7 @@ public class AdminResource {
 	// delete employee
 	@DELETE
 	@Path("/removeEmployee/{employeeID}")
+	@Consumes("application/json")
 	public Response removeEmployee(@PathParam("employeeID") int employeeID) {
 		sampleDao.removeEmployee(employeeID);
 
@@ -58,9 +61,10 @@ public class AdminResource {
 
 	// get all report of an employee 
 	@GET
-	@Path("/dailyReport/{employeeID}")
+	@Path("/dailyReport/emp/{employeeID}")
+	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Report> viewDailyReport(@PathParam("employeeID") int employeeID) {
+	public List<Report> getReportById(@PathParam("employeeID") int employeeID) {
 		List<Report> dailyReport = sampleDao.getReportbyID(employeeID);
 		System.out.println(dailyReport);
 		return dailyReport;
@@ -68,11 +72,17 @@ public class AdminResource {
 	
 	// get daily report of a date
 	@GET
-	@Path("/dailyReport/{on_date}")
+	@Path("/dailyReport/date/{on_date}")
+	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Report> viewDailyReport(@PathParam("on_date") LocalDate on_date) {
-		List<Report> dailyReport = sampleDao.getReportbyDate(java.sql.Date.valueOf(on_date));
+	public List<Report> getReportByDate(@PathParam("on_date") LocalDateParam on_date) {
+		
+		List<Report> dailyReport = new ArrayList<Report>();
+			
+		dailyReport = sampleDao.getReportbyDate(java.sql.Date.valueOf(on_date.toString()));
+		
 		System.out.println(dailyReport);
+		
 		return dailyReport;
 	}
 
