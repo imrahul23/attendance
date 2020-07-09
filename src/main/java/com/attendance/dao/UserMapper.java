@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
-import com.attendance.core.User;
+import com.attendance.model.User;
 
 public class UserMapper implements ResultSetMapper<User>{
 

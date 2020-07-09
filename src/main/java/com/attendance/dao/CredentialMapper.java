@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
-import com.attendance.core.Credential;
+import com.attendance.model.Credential;
 
 public class CredentialMapper implements ResultSetMapper<Credential>{
 	

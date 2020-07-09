@@ -13,19 +13,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.attendance.core.Credential;
-import com.attendance.core.Report;
-import com.attendance.dao.SampleDao;
+import com.attendance.dao.SQLDao;
+import com.attendance.model.Credential;
+import com.attendance.model.Report;
 
 import io.dropwizard.jersey.params.LocalDateParam;
 
 @Path("/admin")
 public class AdminResource {
 
-	private SampleDao sampleDao;
+	private SQLDao sqlDao;
 
-	public AdminResource(SampleDao sampleDao) {
-		this.sampleDao = sampleDao;
+	public AdminResource(SQLDao sampleDao) {
+		this.sqlDao = sampleDao;
 	}
 
 	// get list of all employees
@@ -33,7 +33,7 @@ public class AdminResource {
 	@Path("/getEmployees")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<Credential> getUsers() {
-		return sampleDao.getUserList();
+		return sqlDao.getUserList();
 	}
 
 	// add new employee
@@ -45,7 +45,7 @@ public class AdminResource {
 
 		Credential result = credential;
 
-		sampleDao.addEmployee(credential.getEmployeeID(), credential.getPassword());
+		sqlDao.addEmployee(credential.getEmployeeID(), credential.getPassword());
 		return Response.status(201).entity(result).build();
 	}
 
@@ -54,7 +54,7 @@ public class AdminResource {
 	@Path("/removeEmployee/{employeeID}")
 	@Consumes("application/json")
 	public Response removeEmployee(@PathParam("employeeID") int employeeID) {
-		sampleDao.removeEmployee(employeeID);
+		sqlDao.removeEmployee(employeeID);
 
 		return Response.status(200).entity("Employee with ID " + employeeID + "successfully deleted").build();
 	}
@@ -65,7 +65,7 @@ public class AdminResource {
 	@Consumes("application/json")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Report> getReportById(@PathParam("employeeID") int employeeID) {
-		List<Report> dailyReport = sampleDao.getReportbyID(employeeID);
+		List<Report> dailyReport = sqlDao.getReportbyID(employeeID);
 		System.out.println(dailyReport);
 		return dailyReport;
 	}
@@ -79,7 +79,7 @@ public class AdminResource {
 		
 		List<Report> dailyReport = new ArrayList<Report>();
 			
-		dailyReport = sampleDao.getReportbyDate(java.sql.Date.valueOf(on_date.toString()));
+		dailyReport = sqlDao.getReportbyDate(java.sql.Date.valueOf(on_date.toString()));
 		
 		System.out.println(dailyReport);
 		

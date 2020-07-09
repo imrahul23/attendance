@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
-import com.attendance.core.Report;
+import com.attendance.model.Report;
 
 public class ReportMapper implements ResultSetMapper<Report> {
 

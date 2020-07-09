@@ -2,7 +2,7 @@ package com.attendance;
 
 import org.skife.jdbi.v2.DBI;
 
-import com.attendance.dao.SampleDao;
+import com.attendance.dao.SQLDao;
 import com.attendance.resources.AdminResource;
 import com.attendance.resources.EmployeeResource;
 
@@ -32,7 +32,7 @@ public class AttendanceApplication extends Application<AttendanceConfiguration> 
                     final Environment environment) {
 		final DBIFactory factory = new DBIFactory();
 		final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "mysql");
-		final SampleDao dao = jdbi.onDemand(SampleDao.class);
+		final SQLDao dao = jdbi.onDemand(SQLDao.class);
 
 		environment.jersey().register(new AdminResource(dao));
 		environment.jersey().register(new EmployeeResource(dao));

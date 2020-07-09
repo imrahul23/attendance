@@ -7,26 +7,41 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.attendance.core.Report;
-import com.attendance.dao.SampleDao;
+import com.attendance.dao.SQLDao;
+import com.attendance.model.EmployeeAction;
 
 @Path("/employee")
 public class EmployeeResource {
 
-	private SampleDao sampleDao;
+	private SQLDao sqlDao;
 
-	public EmployeeResource(SampleDao sampleDao) {
-		this.sampleDao = sampleDao;
+	public EmployeeResource(SQLDao sampleDao) {
+		this.sqlDao = sampleDao;
 	}
 
 	// mark absent
-	@Path("/absent")
+	@Path("/action")
 	@PUT
 	@Consumes("application/json")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response markAbsent(Report report) {
-		sampleDao.markAbsent(report.getEmployeeID(), java.sql.Date.valueOf(report.getOnDate()));
-		return Response.status(201).entity(sampleDao).build();
+	public Response markAbsent(EmployeeAction employeeAction) {
+		if(employeeAction.getAction().equals("absent"))
+			sqlDao.markAbsent(employeeAction.getEmployeeID(), java.sql.Date.valueOf(employeeAction.getOn_date().toString()));
+		
+		else if(employeeAction.getAction().equals("inTime"))
+			sqlDao.addInTime(java.sql.Time.valueOf(employeeAction.getTime().toString()), employeeAction.getEmployeeID(), 
+					java.sql.Date.valueOf(employeeAction.getOn_date().toString()));
+		
+		else if(employeeAction.getAction().equals("outTime"))
+			sqlDao.addOutTime(java.sql.Time.valueOf(employeeAction.getTime().toString()), employeeAction.getEmployeeID(), 
+					java.sql.Date.valueOf(employeeAction.getOn_date().toString()));
+		
+		else if(employeeAction.getAction().equals("breakTime"))
+			sqlDao.breakTime(java.sql.Time.valueOf(employeeAction.getTime().toString()), employeeAction.getEmployeeID(), 
+					java.sql.Date.valueOf(employeeAction.getOn_date().toString()));
+		
+		
+		return Response.status(201).entity(employeeAction).build();
 	}
 
 
