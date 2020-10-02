@@ -1,7 +1,5 @@
 # Attendance
 
-Attendance application learning dropwizard
-
 How to start the Attendance application
 ---
 
